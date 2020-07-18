@@ -2,6 +2,7 @@ def multiply(integer1,integer2):
     integer1_size = len(integer1)
     integer2_size = len(integer2)
     sum_stack = []
+    
     for digit1_position in range(integer1_size-1,-1,-1):
         digit1 = int(integer1[digit1_position])
         sum_factor = int(0)
@@ -16,7 +17,7 @@ def multiply(integer1,integer2):
         
         string_line_result = string_line_result if sum_factor == 0 else str(sum_factor) + string_line_result
         line_result = int(string_line_result)*digit1_order
-        sum_stack.append(int(line_result))
+        sum_stack.append(line_result)
     return sum(sum_stack)
         
 def main():
