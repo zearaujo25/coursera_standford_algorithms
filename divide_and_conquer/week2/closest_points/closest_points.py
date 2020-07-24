@@ -52,14 +52,17 @@ def closest_split(ordered_points_by_x,ordered_points_by_y,delta):
     upper_x = x_bar + delta
     lower_x = x_bar - delta
     Sy = [point  for point in ordered_points_by_y if point.x >=lower_x and point.x<= upper_x]
+    s_size = len(Sy)
+    if s_size <=1:
+        return None
+
     best = delta
     best_pair = None
-    s_size = len(Sy)
-    last_item = 1 if s_size-7 >=0 else s_size-7
-    for i in range(0,last_item):
+
+    for i in range(0,s_size):
         for j in range(1,min(7,s_size-i)):
             pq = PointPair(Sy[i],Sy[i+j])
-            if pq.get_distance() <best:
+            if pq.get_distance() < best:
                 best = pq.get_distance()
                 best_pair = pq
     return best_pair
