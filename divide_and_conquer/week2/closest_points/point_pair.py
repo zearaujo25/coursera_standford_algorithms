@@ -14,10 +14,10 @@ class PointPair:
         return self.p1.find_distance_to_point(self.p2)
 
     @staticmethod   
-    def min(point_list):
+    def get_closest_pair(pair_list):
         min_distance = float("inf")
         min_pair = None
-        for pair in point_list:
+        for pair in pair_list:
             if pair is None:
                 continue
             if pair.get_distance() < min_distance:

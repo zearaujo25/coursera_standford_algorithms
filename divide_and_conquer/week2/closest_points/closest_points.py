@@ -19,29 +19,22 @@ def find_closest(points = None,ordered_points_by_x=None,ordered_points_by_y=None
 
     best_left = find_closest(ordered_points_by_x= Lx, ordered_points_by_y= Ly)
     best_right = find_closest(ordered_points_by_x= Rx, ordered_points_by_y= Ry)
-    best_pair = PointPair.min((best_left,best_right))
+    best_pair = PointPair.get_closest_pair((best_left,best_right))
     delta = best_pair.get_distance()
     best_split = closest_split(ordered_points_by_x,ordered_points_by_y,delta)
-    return PointPair.min((best_pair,best_split))
+    return PointPair.get_closest_pair((best_pair,best_split))
 
 def base_case(points):
     point1 = points[0]
     if len(points) == 1:
         raise Exception("Single point to find value")
     point2 = points[1]
-    d12 = Point.find_distance(point1,point2)
     if len(points) == 2:
-        return (point1,point2)
-    point3 = points[2]
-    d13 = Point.find_distance(point1,point2)
-    d23 = Point.find_distance(point2,point3)
-    min_distance = min(d12,d13,d23)
-    if min_distance == d12:
         return PointPair(point1,point2)
-    elif min_distance == d13:
-        return PointPair(point1,point3)
-    else:
-        return PointPair(point2,point3)
+    point3 = points[2]
+    return PointPair.get_closest_pair([ PointPair(point1,point2),
+                                        PointPair(point1,point3),
+                                        PointPair(point2,point3)])
 
 def split_points(points,size):
     return points[:size//2],points[size//2:]
