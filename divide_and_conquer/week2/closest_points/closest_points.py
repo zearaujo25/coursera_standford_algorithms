@@ -14,8 +14,10 @@ def find_closest(points = None,ordered_points_by_x=None,ordered_points_by_y=None
     if size <=3:
         return base_case(ordered_points_by_x)
     
-    Lx,Rx = split_points(ordered_points_by_x,size)
-    Ly,Ry = split_points(ordered_points_by_y,size)
+    Lx,Rx = split_x(ordered_points_by_x,size)
+    x_median = ordered_points_by_x[size//2-1].x
+    Ly, Ry = split_y(ordered_points_by_y, x_median)
+
 
     best_left = find_closest(ordered_points_by_x= Lx, ordered_points_by_y= Ly)
     best_right = find_closest(ordered_points_by_x= Rx, ordered_points_by_y= Ry)
@@ -23,8 +25,9 @@ def find_closest(points = None,ordered_points_by_x=None,ordered_points_by_y=None
 
     delta = best_pair.get_distance()
     best_split = closest_split(ordered_points_by_x,ordered_points_by_y,delta)
-    
+
     return PairOfPoints.get_closest_pair((best_pair,best_split))
+
 
 def base_case(points):
     point1 = points[0]
@@ -38,8 +41,17 @@ def base_case(points):
                                         PairOfPoints(point1,point3),
                                         PairOfPoints(point2,point3)])
 
-def split_points(points,size):
+def split_x(points,size):
     return points[:size//2],points[size//2:]
+
+def split_y(ordered_points_by_y, x_median):
+    Ly,Ry = [],[]
+    for point in ordered_points_by_y:
+        if point.x <= x_median:
+            Ly.append(point)
+        else:
+            Ry.append(point)
+    return Ly, Ry
 
 def closest_split(ordered_points_by_x,ordered_points_by_y,delta):
     size = len(ordered_points_by_x)

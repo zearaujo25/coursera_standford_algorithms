@@ -18,6 +18,16 @@ def create_test_case(correct_pair,n):
     shuffle(test_case)
     return test_case
 
+def read_txt(path):
+    test_case = []
+    with open(path) as f: 
+        for line in f: 
+            x = int(line.split()[0])
+            y = int(line.split()[1])
+            test_case.append(Point(x,y))
+    return test_case
+
+
 class ClosestPointTest(unittest.TestCase):
     def test_one_point(self):
         points = [Point(0,0)]
@@ -70,6 +80,14 @@ class ClosestPointTest(unittest.TestCase):
         returned_point1,returned_point2 =result_pair.get_points()
         self.assertTrue(returned_point1 in correct_pair.get_points(),msg="Wrong pair: {}".format(result_pair))
         self.assertTrue(returned_point2 in correct_pair.get_points())
+
+    def test_best_points_txt_file(self):
+        correct_pair = PairOfPoints(Point(5761865497,3907797933),Point(5761962260,3907872254))
+        path = "100k_test_case.txt"
+        points = read_txt(path)
+        correct_distance = correct_pair.get_distance()
+        result_pair = find_closest(points)
+        self.assertEqual(correct_distance,result_pair.get_distance(),msg="Wrong points returned: {}".format(result_pair))
 
 if __name__ == '__main__':
     unittest.main()
