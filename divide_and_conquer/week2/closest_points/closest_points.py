@@ -20,8 +20,10 @@ def find_closest(points = None,ordered_points_by_x=None,ordered_points_by_y=None
     best_left = find_closest(ordered_points_by_x= Lx, ordered_points_by_y= Ly)
     best_right = find_closest(ordered_points_by_x= Rx, ordered_points_by_y= Ry)
     best_pair = PairOfPoints.get_closest_pair((best_left,best_right))
+
     delta = best_pair.get_distance()
     best_split = closest_split(ordered_points_by_x,ordered_points_by_y,delta)
+    
     return PairOfPoints.get_closest_pair((best_pair,best_split))
 
 def base_case(points):
