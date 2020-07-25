@@ -15,6 +15,8 @@ class Point:
 
     @staticmethod
     def find_distance(point1,point2):
-        x1,y1 = point1.get_coordinates()
-        x2,y2 = point2.get_coordinates()
-        return sqrt( (x1 - x2)**2 + (y1 - y2)**2  )
+        return point1.find_distance_to_point(point2)
+
+    def __str__(self):
+     return "X: {}, Y: {}".format(self.x,self.y)
+        

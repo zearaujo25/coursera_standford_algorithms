@@ -1,7 +1,7 @@
 from math import sqrt  
 from point import Point
 
-class PointPair:
+class PairOfPoints:
     '''A class that represent a pair of points in a plane'''
     def __init__(self,point1,point2):
         self.p1 = point1
@@ -22,4 +22,8 @@ class PointPair:
                 continue
             if pair.get_distance() < min_distance:
                 min_pair = pair
+                min_distance = min_pair.get_distance()
         return min_pair
+
+    def __str__(self):
+     return "P1: {}, P2: {}".format(self.p1.get_coordinates(),self.p2.get_coordinates())
