@@ -1,4 +1,4 @@
-from recursiveMultiplication import multiply_recursively
+from recursive_multiplication import multiply_recursively
 
 def main():
     test_small_number()
