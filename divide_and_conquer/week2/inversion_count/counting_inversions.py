@@ -49,14 +49,21 @@ def merge_and_count(sorted_left_half,sorted_right_half):
     
 
 
+def read_txt(path):
+    test_case = []
+    with open(path) as f: 
+        for line in f: 
+            test_case.append(int(line))
+    return test_case
 
 
 if __name__ == '__main__':
     correct_sort = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     correct_inversions = len(correct_sort)*(len(correct_sort)-1)/2
-    print(correct_inversions)
     string_input = '9876543210'
     sorted_input,inversions = count_inversions(string_input)
-    assert (correct_sort == sorted_input and correct_inversions == inversions), "Wrong Sort: {}, Wrong Inversions: {}".format(sorted_input,inversions) 
+    assert (correct_sort == sorted_input and correct_inversions == inversions), "Wrong Sort: {}, Wrong Inversions: {}".format(sorted_input,inversions)
+    assignment = read_txt("assignment.txt") 
+    print(count_inversions(assignment)[1])
 
 
