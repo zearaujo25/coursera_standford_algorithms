@@ -1,11 +1,12 @@
 from node import Node
 from edge import Edge
 class Graph:
-    def __init__(self,graph_id = None):
+    def __init__(self,graph_path = None):
         #dictionary containing the adjacent list
         self.adjacent_list = {}
-        self.graph_id = graph_id
-        
+        self.graph_id = graph_path
+        if graph_path is not None:
+            self.read_graph_from_adjacent_list_file(graph_path)
     def add_node(self,node):
         if node not in self.get_nodes():
             self.adjacent_list[node] = set()
@@ -20,7 +21,6 @@ class Graph:
             self.adjacent_list[edge_nodes[0]].add(edge)
             if not edge.is_self_edge():
                 self.adjacent_list[edge_nodes[1]].add(edge)
-    
 
     def get_nodes(self):
         return self.adjacent_list.keys()
@@ -60,32 +60,32 @@ class Graph:
         return super_node
 
     def read_graph_from_adjacent_list_file(self,graph_path):
-        test_case = Graph()
         with open(graph_path) as f: 
             seen_nodes = {}
+            seen_edges = {}
             for line in f: 
-                
                 line_nodes = line.split()
                 node_id = int(line_nodes[0])
-                print("Seen nodes: {}".format(seen_nodes))
                 if node_id not in seen_nodes.keys():
-                    print("adding new node: {}".format(node_id))
                     line_node = Node(node_id=node_id)
-                    test_case.add_node(line_node)
+                    self.add_node(line_node)
                     seen_nodes[node_id] = line_node
+                    seen_edges[node_id] = []
 
                 for edge_node_string in line_nodes[1:]:
                     edge_node_id = int(edge_node_string)
-                    print("Seen nodes: {}".format(seen_nodes))
                     if edge_node_id not in seen_nodes.keys():
-                        print("adding new end_node: {}".format(edge_node_id))
                         edge_node = Node(node_id=edge_node_id)
-                        test_case.add_node(edge_node)
-                        new_edge = Edge(edge_node,seen_nodes[node_id])
-                        test_case.add_edge(new_edge)
+                        self.add_node(edge_node)
+                        seen_edges[edge_node_id] = []
                         seen_nodes[edge_node_id] = edge_node
-        print("Seen nodes: {}".format(seen_nodes))
-        return test_case
+
+                    if edge_node_id not in seen_edges[node_id]:
+                        new_edge = Edge(seen_nodes[edge_node_id],seen_nodes[node_id])
+                        self.add_edge(new_edge)
+                        seen_edges[node_id].append(edge_node_id)
+                        seen_edges[edge_node_id].append(node_id)
+
     def __str__(self):
         output = "-------------------\nGraphId: {}\n Graph:\n".format(self.graph_id)
         for node in self.adjacent_list.keys():

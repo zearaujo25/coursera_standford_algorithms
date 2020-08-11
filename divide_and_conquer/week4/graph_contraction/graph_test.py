@@ -151,7 +151,31 @@ class RandomMinCutTest(unittest.TestCase):
         self.assertTrue(len(test_result_node_edges) == 2)
         self.assertTrue(len(test_node3_edges) == 2)
         self.assertTrue(len(result_node.nodes_contracted) ==2)
-        
+
+    def test_read_graph_from_file(self):
+        test_graph_path = 'divide_and_conquer/week4/graph_contraction/test_cases/input_random_1_6.txt'
+        test_case = Graph(test_graph_path)
+        self.assertEqual(6,len(test_case.get_nodes()))
+        self.assertEqual(9,len(test_case.get_edges()))
+
+        for node in test_case.get_nodes():
+
+            node_edges = test_case.get_node_edges(node)
+            if node.node_id == 1 :
+                self.assertEqual(3,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
+            elif node.node_id == 2: 
+                self.assertEqual(4,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
+            elif node.node_id == 3: 
+                self.assertEqual(2,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
+            elif node.node_id == 4: 
+                self.assertEqual(3,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
+            elif node.node_id == 5:                
+                self.assertEqual(4,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
+            elif node.node_id == 6:
+                self.assertEqual(2,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
+            else:
+                raise Exception("Wrong Id")
+        print(str(test_case))
 
 if __name__ == "__main__":
     unittest.main()
