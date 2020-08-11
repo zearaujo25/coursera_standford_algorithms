@@ -8,6 +8,9 @@ class Edge:
     def change_node(self,node_to_remove,node_to_add):
         self.nodes.remove(node_to_remove)
         self.nodes.add(node_to_add)
+
+    def is_self_edge(self):
+        return len(self.nodes) == 1
     
     def __str__(self):
         return "Original nodes: {}".format(self.original_nodes)
