@@ -7,16 +7,16 @@ def find_min_cut(graph):
     trial_graph = deepcopy(graph)
     num_nodes = len(graph.get_nodes())
     while(num_nodes>2):
-        edges = trial_graph.get_edges()
+        edges = list(trial_graph.get_edges())
         edge_index = randrange(len(edges))
         choosen_edge = edges[edge_index] 
         trial_graph.contract(choosen_edge)
         num_nodes = len(trial_graph.get_nodes())
-    return graph
+    return trial_graph
 
 def random_contractions(graph):
     number_of_nodes = len(graph.get_nodes())
-    number_of_trials = ceil(number_of_nodes**2 * log(number_of_nodes))
+    number_of_trials = ceil(number_of_nodes**2)
     min_cut = None
     for i in range(0,number_of_trials):
         trial_min_cut = find_min_cut(graph)
