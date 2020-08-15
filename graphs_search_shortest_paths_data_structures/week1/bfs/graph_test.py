@@ -3,7 +3,7 @@ from graph import Graph
 from node import Node
 from edge import Edge
 
-class RandomMinCutTest(unittest.TestCase):
+class TestGraph(unittest.TestCase):
     
     def test_adding_node(self):
         test_case = Graph()
@@ -11,6 +11,20 @@ class RandomMinCutTest(unittest.TestCase):
         for i in range(n_nodes):
             test_node = Node(node_id=i)
             test_case.add_node(test_node)
+        nodes = test_case.get_nodes()
+        self.assertEqual(n_nodes,len(nodes))
+        seen_nodes = set()
+        for node in nodes:
+            seen_nodes.add(node.node_id)
+        self.assertEqual(n_nodes,len(seen_nodes))
+
+    def test_adding_nodes(self):
+        test_case = Graph()
+        n_nodes = 10
+        nodes_to_add = [Node(node_id=i) for i in range(n_nodes) ] 
+
+        test_case.add_nodes(nodes_to_add) 
+
         nodes = test_case.get_nodes()
         self.assertEqual(n_nodes,len(nodes))
         seen_nodes = set()

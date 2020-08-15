@@ -10,6 +10,10 @@ class Graph:
     def add_node(self,node):
         if node not in self.get_nodes():
             self.adjacent_list[node] = set()
+    
+    def add_nodes(self,nodes):
+        for node in nodes:
+            self.add_node(node)
 
     def remove_nodes(self,nodes):
         for node in nodes:
@@ -21,6 +25,10 @@ class Graph:
             self.adjacent_list[edge_nodes[0]].add(edge)
             if not edge.is_self_edge():
                 self.adjacent_list[edge_nodes[1]].add(edge)
+    
+    def add_edges(self,edges):
+        for edge in edges:
+            self.add_edge(edge)
 
     def get_nodes(self):
         return self.adjacent_list.keys()

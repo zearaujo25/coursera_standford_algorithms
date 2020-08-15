@@ -3,7 +3,7 @@ from graph import Graph
 from node import Node
 from edge import Edge
 
-class RandomMinCutTest(unittest.TestCase):
+class TestGraph(unittest.TestCase):
     
     def test_adding_node(self):
         test_case = Graph()
