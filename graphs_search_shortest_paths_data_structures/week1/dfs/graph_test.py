@@ -136,7 +136,7 @@ class TestGraph(unittest.TestCase):
         self.assertTrue(len(test_node1_edges) == 1)
         self.assertTrue(len(test_node2_edges) == 1)
 
-    def test_add_direc_edge(self):
+    def test_add_direct_edge(self):
         test_case = Graph()
         
         test_node1 = Node(node_id=1)
@@ -151,7 +151,7 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(1,len(edges))
         self.assertEqual(1,len(test_case.get_node_edges(test_node1)))
         self.assertEqual(0,len(test_case.get_node_edges(test_node2)))
-        
+
     def test_contract(self):
         test_case = Graph()
         
