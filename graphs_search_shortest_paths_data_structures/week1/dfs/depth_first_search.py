@@ -26,7 +26,7 @@ def topological_sort(graph):
     for next_node in nodes:
         if not next_node.is_explored():
             depth_first_search_recursive(graph,next_node,current_label)
-    pass
+    
 
 
 def find_strongly_connected_components(graph):
