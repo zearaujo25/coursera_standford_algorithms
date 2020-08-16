@@ -18,6 +18,9 @@ class Graph:
     def remove_nodes(self,nodes):
         for node in nodes:
             del self.adjacent_list[node]
+    
+    def add_direct_edge(self,node,edge):
+        self.adjacent_list[node].add(edge)
 
     def add_undirected_edge(self,edge):
         if edge not in self.get_edges():
