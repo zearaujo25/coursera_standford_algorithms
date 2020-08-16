@@ -13,8 +13,11 @@ class Edge:
         if node not in self.nodes:
             raise Exception("Node not in edge")
         nodes = list(self.nodes)
-        nodes.remove(node)
+        if len(nodes) > 1 :
+            nodes.remove(node)
+        
         return nodes[0]
+    
 
     def is_self_edge(self):
         return len(self.nodes) == 1

@@ -4,8 +4,9 @@ from node import Node
 from edge import Edge
 from depth_first_search import depth_first_search,depth_first_search_recursive,find_strongly_connected_components
 
-class EdgeTest(unittest.TestCase):
-    def breadth_first_search_undirected_connected_graph_test(self):
+class TestDFS(unittest.TestCase):
+
+    def depth_first_search_undirected_connected_graph_test(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -21,7 +22,7 @@ class EdgeTest(unittest.TestCase):
         for node in test_nodes:
             self.assertTrue(node.is_explored())
 
-    def breadth_first_search_undirected_disconnected_graph_test(self):
+    def depth_first_search_undirected_disconnected_graph_test(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -39,7 +40,7 @@ class EdgeTest(unittest.TestCase):
         for node in test_nodes[:3]:
             self.assertTrue(node.is_explored())
 
-    def breadth_first_search_recursive_undirected_connected_graph_test(self):
+    def depth_first_search_recursive_undirected_connected_graph_test(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -55,7 +56,7 @@ class EdgeTest(unittest.TestCase):
         for node in test_nodes:
             self.assertTrue(node.is_explored())
 
-    def breadth_first_search_recursive_undirected_disconnected_graph_test(self):
+    def depth_first_search_recursive_undirected_disconnected_graph_test(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -72,8 +73,8 @@ class EdgeTest(unittest.TestCase):
         for node in test_nodes[:3]:
             self.assertTrue(node.is_explored())
 
-    def find_strongly_connected_components_test(self):
-        pass
+    # def find_strongly_connected_components_test(self):
+    #     pass
 
 if __name__ == "__main__":
     unittest.main()
