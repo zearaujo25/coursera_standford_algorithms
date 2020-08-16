@@ -152,6 +152,28 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(1,len(test_case.get_node_edges(test_node1)))
         self.assertEqual(0,len(test_case.get_node_edges(test_node2)))
 
+    def test_reversed(self):
+        test_case = Graph()
+        
+        test_node1 = Node(node_id=1)
+        test_node2 = Node(node_id=2)
+        test_case.add_node(test_node1)
+        test_case.add_node(test_node2)
+        
+        test_edge = Edge(node1=test_node1,node2=test_node2)
+        test_case.add_direct_edge(test_node1,test_edge)
+
+        test_result = test_case.get_reversed()
+        
+        self.assertEqual(test_case.get_nodes(),test_result.get_nodes())
+        self.assertEqual(test_case.get_edges(),test_result.get_edges())
+
+        self.assertEqual(1,len(test_case.get_node_edges(test_node1)))
+        self.assertEqual(0,len(test_case.get_node_edges(test_node2)))
+
+        self.assertEqual(1,len(test_result.get_node_edges(test_node2)))
+        self.assertEqual(0,len(test_result.get_node_edges(test_node1)))
+
     def test_contract(self):
         test_case = Graph()
         

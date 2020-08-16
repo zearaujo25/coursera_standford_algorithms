@@ -70,6 +70,16 @@ class Graph:
         self.remove_nodes(nodes)
         return super_node
 
+    def get_reversed(self):
+        reversed_graph = Graph()
+        for node in self.adjacent_list:
+            reversed_graph.add_node(node)
+            for edge in self.get_node_edges(node):
+                detination_node = edge.get_destination(node)
+                reversed_graph.add_node(detination_node)
+                reversed_graph.add_direct_edge(detination_node,edge)
+        return reversed_graph
+
     def read_graph_from_adjacent_list_file(self,graph_path):
         with open(graph_path) as f: 
             seen_nodes = {}
