@@ -43,7 +43,7 @@ class TestGraph(unittest.TestCase):
         nodes = test_case.get_nodes()
         self.assertEqual(0,len(nodes))
 
-    def test_add_edge(self):
+    def test_add_undirected_edge(self):
         test_case = Graph()
         
         test_node1 = Node(node_id=1)
@@ -52,12 +52,12 @@ class TestGraph(unittest.TestCase):
         test_case.add_node(test_node2)
         
         test_edge = Edge(node1=test_node1,node2=test_node2)
-        test_case.add_edge(test_edge)
+        test_case.add_undirected_edge(test_edge)
 
         edges = test_case.get_edges()
         self.assertEqual(1,len(edges))
 
-    def test_remove_edge(self):
+    def test_remove_undirected_edge(self):
         test_case = Graph()
         
         test_node1 = Node(node_id=1)
@@ -66,7 +66,7 @@ class TestGraph(unittest.TestCase):
         test_case.add_node(test_node2)
         
         test_edge = Edge(node1=test_node1,node2=test_node2)
-        test_case.add_edge(test_edge)
+        test_case.add_undirected_edge(test_edge)
         test_case.remove_edge(test_edge)
         
         edges = test_case.get_edges()
@@ -79,7 +79,7 @@ class TestGraph(unittest.TestCase):
         test_case.add_node(test_node1)
         
         test_edge = Edge(node1=test_node1,node2=test_node1)
-        test_case.add_edge(test_edge)
+        test_case.add_undirected_edge(test_edge)
         test_case.remove_edge(test_edge)
         
         edges = test_case.get_edges()
@@ -97,8 +97,8 @@ class TestGraph(unittest.TestCase):
         test_case.add_node(test_node1)
         test_case.add_node(test_node2)
         test_case.add_node(test_node3)
-        test_case.add_edge(test_edge_1_3)
-        test_case.add_edge(test_edge_2_3)
+        test_case.add_undirected_edge(test_edge_1_3)
+        test_case.add_undirected_edge(test_edge_2_3)
 
         test_super_node = Node()
         test_case.add_node(test_super_node)
@@ -126,10 +126,7 @@ class TestGraph(unittest.TestCase):
 
         test_case.add_node(test_node1)
         test_case.add_node(test_node2)
-        test_case.add_edge(test_edge_1_1_1)
-        test_case.add_edge(test_edge_1_1_2)
-        test_case.add_edge(test_edge_1_2)
-
+        test_case.add_undirected_edges([test_edge_1_1_1,test_edge_1_1_2,test_edge_1_2])
         
         test_case.clean_self_edges(test_node1)
 
@@ -152,9 +149,8 @@ class TestGraph(unittest.TestCase):
         test_case.add_node(test_node1)
         test_case.add_node(test_node2)
         test_case.add_node(test_node3)
-        test_case.add_edge(test_edge_1_3)
-        test_case.add_edge(test_edge_1_2)
-        test_case.add_edge(test_edge_2_3)
+        test_case.add_undirected_edges([test_edge_1_3,test_edge_1_2,test_edge_2_3])
+
 
 
         result_node = test_case.contract(test_edge_1_2)

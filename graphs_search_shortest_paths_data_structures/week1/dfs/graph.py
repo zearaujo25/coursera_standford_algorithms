@@ -19,16 +19,16 @@ class Graph:
         for node in nodes:
             del self.adjacent_list[node]
 
-    def add_edge(self,edge):
+    def add_undirected_edge(self,edge):
         if edge not in self.get_edges():
             edge_nodes = list(edge.nodes)
             self.adjacent_list[edge_nodes[0]].add(edge)
             if not edge.is_self_edge():
                 self.adjacent_list[edge_nodes[1]].add(edge)
     
-    def add_edges(self,edges):
+    def add_undirected_edges(self,edges):
         for edge in edges:
-            self.add_edge(edge)
+            self.add_undirected_edge(edge)
 
     def get_nodes(self):
         return self.adjacent_list.keys()
@@ -90,7 +90,7 @@ class Graph:
 
                     if edge_node_id not in seen_edges[node_id]:
                         new_edge = Edge(seen_nodes[edge_node_id],seen_nodes[node_id])
-                        self.add_edge(new_edge)
+                        self.add_undirected_edge(new_edge)
                         seen_edges[node_id].append(edge_node_id)
                         seen_edges[edge_node_id].append(node_id)
 

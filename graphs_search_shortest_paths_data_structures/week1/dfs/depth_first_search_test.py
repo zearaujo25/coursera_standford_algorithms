@@ -15,7 +15,7 @@ class EdgeTest(unittest.TestCase):
                       Edge(test_nodes[3],test_nodes[3])]
 
         graph.add_nodes(test_nodes)
-        graph.add_edges(test_edges)
+        graph.add_undirected_edges(test_edges)
         origin_node = test_nodes[1]
         depth_first_search(graph,origin_node)
         for node in test_nodes:
@@ -30,7 +30,7 @@ class EdgeTest(unittest.TestCase):
                       Edge(test_nodes[3],test_nodes[3])]
 
         graph.add_nodes(test_nodes)
-        graph.add_edges(test_edges)
+        graph.add_undirected_edges(test_edges)
         origin_node = test_nodes[1]
         depth_first_search(graph,origin_node)
         
@@ -49,7 +49,7 @@ class EdgeTest(unittest.TestCase):
                       Edge(test_nodes[3],test_nodes[3])]
 
         graph.add_nodes(test_nodes)
-        graph.add_edges(test_edges)
+        graph.add_undirected_edges(test_edges)
         origin_node = test_nodes[1]
         depth_first_search_recursive(graph,origin_node)
         for node in test_nodes:
@@ -64,7 +64,7 @@ class EdgeTest(unittest.TestCase):
                       Edge(test_nodes[3],test_nodes[3])]
 
         graph.add_nodes(test_nodes)
-        graph.add_edges(test_edges)
+        graph.add_undirected_edges(test_edges)
         origin_node = test_nodes[1]
         depth_first_search_recursive(graph,origin_node)
         
