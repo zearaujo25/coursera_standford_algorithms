@@ -1,9 +1,9 @@
 from queue import Queue
-def breadth_first_search(graph,node):
-    node.mark_as_explored()
-    node.set_distance(0)
+def breadth_first_search(graph,start_node):
+    start_node.mark_as_explored()
+    start_node.set_distance(0)
     search_queue = Queue()
-    search_queue.put(node)
+    search_queue.put(start_node)
     while not search_queue.empty():
         next_node = search_queue.get()
         for edge in graph.get_node_edges(next_node):

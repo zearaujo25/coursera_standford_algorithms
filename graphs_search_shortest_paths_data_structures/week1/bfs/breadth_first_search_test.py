@@ -20,7 +20,7 @@ class EdgeTest(unittest.TestCase):
         breadth_first_search(graph,origin_node)
         for node in test_nodes:
             self.assertTrue(node.is_explored())
-            self.assertEquals(1,node)
+            self.assertEquals(1,node.get_distance())
 
     def breadth_first_search_undirected_disconnected_graph_test(self):
         graph = Graph()
@@ -39,7 +39,7 @@ class EdgeTest(unittest.TestCase):
         self.assertEquals(float("inf"),test_nodes[3].get_distance())
         for node in test_nodes[:3]:
             self.assertTrue(node.is_explored())
-            self.assertEquals(1,node)
+            self.assertEquals(1,node.get_distance())
 
     def find_connected_components_test(self):
         graph = Graph()
