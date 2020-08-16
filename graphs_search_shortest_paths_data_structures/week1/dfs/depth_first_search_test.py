@@ -6,7 +6,7 @@ from depth_first_search import depth_first_search,depth_first_search_recursive,f
 
 class TestDFS(unittest.TestCase):
 
-    def depth_first_search_undirected_connected_graph_test(self):
+    def test_depth_first_search_undirected_connected_graph(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -22,7 +22,7 @@ class TestDFS(unittest.TestCase):
         for node in test_nodes:
             self.assertTrue(node.is_explored())
 
-    def depth_first_search_undirected_disconnected_graph_test(self):
+    def test_depth_first_search_undirected_disconnected_graph(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -36,11 +36,11 @@ class TestDFS(unittest.TestCase):
         depth_first_search(graph,origin_node)
         
         self.assertFalse(test_nodes[3].is_explored())
-        self.assertEquals(float("inf"),test_nodes[3].get_distance())
+        self.assertEqual(float("inf"),test_nodes[3].get_distance())
         for node in test_nodes[:3]:
             self.assertTrue(node.is_explored())
 
-    def depth_first_search_recursive_undirected_connected_graph_test(self):
+    def test_depth_first_search_recursive_undirected_connected_graph(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -56,7 +56,7 @@ class TestDFS(unittest.TestCase):
         for node in test_nodes:
             self.assertTrue(node.is_explored())
 
-    def depth_first_search_recursive_undirected_disconnected_graph_test(self):
+    def test_depth_first_search_recursive_undirected_disconnected_graph(self):
         graph = Graph()
         test_nodes = [Node(node_id=0),Node(node_id=1),Node(node_id=2),Node(node_id=3)]
         test_edges = [Edge(test_nodes[0],test_nodes[1]),
@@ -73,8 +73,8 @@ class TestDFS(unittest.TestCase):
         for node in test_nodes[:3]:
             self.assertTrue(node.is_explored())
 
-    # def find_strongly_connected_components_test(self):
-    #     pass
+    def find_strongly_connected_components_test(self):
+        pass
 
 if __name__ == "__main__":
     unittest.main()
