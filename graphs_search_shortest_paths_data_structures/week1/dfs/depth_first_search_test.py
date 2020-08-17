@@ -162,5 +162,6 @@ class TestDFS(unittest.TestCase):
         print(test_finder.get_top_ordered_scc(20))
         print("Test OK")
 
+
 if __name__ == "__main__":
     unittest.main()

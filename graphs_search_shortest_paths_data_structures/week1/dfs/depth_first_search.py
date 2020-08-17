@@ -3,6 +3,7 @@ import sys
 
 sys.setrecursionlimit(0x100000)
 
+
 def depth_first_search(graph,start_node):
     start_node.mark_as_explored()
     search_stack = LifoQueue()
@@ -45,10 +46,13 @@ class SCCFinder():
 
     def find_strongly_connected_components(self):
         reversed_graph = self.graph.get_reversed()
+        print("starting reverse")
+        print(str(reversed_graph))
         self.dfs_loop(reversed_graph)
+        print("starting original")
+        print(str(self.graph))
         self.dfs_loop(self.graph)
 
-        
     def dfs(self,graph,start_node):
         self.explored.add(start_node)
         search_stack = LifoQueue()
@@ -57,6 +61,7 @@ class SCCFinder():
         local_time = self.global_time
         self.global_time +=1
         local_time +=1
+
 
         while not search_stack.empty():
             next_node = search_stack.get()
