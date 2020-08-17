@@ -91,7 +91,38 @@ class TestDFS(unittest.TestCase):
         self.assertTrue(test_nodes[1].get_distance() == 2 or test_nodes[1].get_distance() == 3)
 
     def test_scc_finder(self):
-        pass
+        test_graph = Graph()
+        test_nodes = [Node(node_id=i+1) for i in range(9)]
+        test_graph.add_nodes(test_nodes)
+
+        #scc1
+        test_graph.add_direct_edge(test_nodes[0],Edge(test_nodes[0],test_nodes[1]))
+        test_graph.add_direct_edge(test_nodes[1],Edge(test_nodes[1],test_nodes[2]))
+        test_graph.add_direct_edge(test_nodes[2],Edge(test_nodes[2],test_nodes[0]))
+
+        #scc2
+        test_graph.add_direct_edge(test_nodes[3],Edge(test_nodes[3],test_nodes[4]))
+        test_graph.add_direct_edge(test_nodes[4],Edge(test_nodes[4],test_nodes[5]))
+        test_graph.add_direct_edge(test_nodes[5],Edge(test_nodes[5],test_nodes[3]))
+
+        #scc3
+        test_graph.add_direct_edge(test_nodes[6],Edge(test_nodes[6],test_nodes[7]))
+        test_graph.add_direct_edge(test_nodes[7],Edge(test_nodes[7],test_nodes[8]))
+        test_graph.add_direct_edge(test_nodes[8],Edge(test_nodes[8],test_nodes[6]))
+
+        #connecting scc
+        test_graph.add_direct_edge(test_nodes[3],Edge(test_nodes[3],test_nodes[0]))
+        test_graph.add_direct_edge(test_nodes[6],Edge(test_nodes[6],test_nodes[5]))
+
+        finder_test = SCCFinder(test_graph)
+
+        finder_test.find_strongly_connected_components()
+
+        n_leaders = set(finder_test.leaders.values())
+        self.assertEqual(3,len(n_leaders))
+
+        
+
 
 if __name__ == "__main__":
     unittest.main()

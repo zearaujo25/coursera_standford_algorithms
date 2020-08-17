@@ -1,5 +1,5 @@
 from queue import LifoQueue
-from copy import deepcopy
+
 def depth_first_search(graph,start_node):
     start_node.mark_as_explored()
     search_stack = LifoQueue()
@@ -48,7 +48,11 @@ class SCCFinder():
 
     def find_strongly_connected_components(self):
         reversed_graph = self.graph.get_reversed()
+        print("starting reverse")
+        print(str(reversed_graph))
         self.dfs_loop(reversed_graph)
+        print("starting original")
+        print(str(self.graph))
         self.dfs_loop(self.graph)
 
         
@@ -56,7 +60,6 @@ class SCCFinder():
         
         self.explored.add(current_node)
         self.leaders[current_node] = self.curren_leader_node 
-        
         for edge in graph.get_node_edges(current_node):
             destination_node = edge.get_destination(current_node)
             if not destination_node in self.explored:
@@ -75,6 +78,8 @@ class SCCFinder():
             if current_node not in self.explored:
                 self.curren_leader_node = current_node
                 self.dfs(graph,current_node)
-        self.f = deepcopy(self.new_f)
+        for label in self.new_f:
+            self.f[label] = self.new_f[label]
+        
         self.new_f.clear()
                 
