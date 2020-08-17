@@ -1,12 +1,13 @@
 from node import Node
 from edge import Edge
 class Graph:
-    def __init__(self,graph_path = None):
+    def __init__(self,graph_path = None,undirected=True):
         #dictionary containing the adjacent list
         self.adjacent_list = {}
         self.graph_id = graph_path
         if graph_path is not None:
-            self.read_graph_from_adjacent_list_file(graph_path)
+            self.read_graph_from_adjacent_list_file(graph_path,undirected)
+            
     def add_node(self,node):
         if node not in self.get_nodes():
             self.adjacent_list[node] = set()
@@ -19,8 +20,8 @@ class Graph:
         for node in nodes:
             del self.adjacent_list[node]
     
-    def add_direct_edge(self,node,edge):
-        self.adjacent_list[node].add(edge)
+    def add_direct_edge(self,source_node,edge):
+        self.adjacent_list[source_node].add(edge)
 
     def add_undirected_edge(self,edge):
         if edge not in self.get_edges():
@@ -80,7 +81,7 @@ class Graph:
                 reversed_graph.add_direct_edge(detination_node,edge)
         return reversed_graph
 
-    def read_graph_from_adjacent_list_file(self,graph_path):
+    def read_graph_from_adjacent_list_file(self,graph_path,undirected = True):
         with open(graph_path) as f: 
             seen_nodes = {}
             seen_edges = {}
@@ -103,9 +104,13 @@ class Graph:
 
                     if edge_node_id not in seen_edges[node_id]:
                         new_edge = Edge(seen_nodes[edge_node_id],seen_nodes[node_id])
-                        self.add_undirected_edge(new_edge)
+                        if undirected:
+                            self.add_undirected_edge(new_edge)
+                            seen_edges[edge_node_id].append(node_id)
+                        else:
+                            self.add_direct_edge(seen_nodes[node_id],new_edge)
                         seen_edges[node_id].append(edge_node_id)
-                        seen_edges[edge_node_id].append(node_id)
+                        
 
     def __str__(self):
         output = "-------------------\nGraphId: {}\n Graph:\n".format(self.graph_id)

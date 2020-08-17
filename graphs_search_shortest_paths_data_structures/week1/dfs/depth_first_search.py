@@ -1,5 +1,8 @@
-from queue import LifoQueue
-from copy import deepcopy
+from queue import LifoQueue,Queue
+import sys 
+
+sys.setrecursionlimit(0x100000)
+
 def depth_first_search(graph,start_node):
     start_node.mark_as_explored()
     search_stack = LifoQueue()
@@ -28,12 +31,6 @@ def topological_sort(graph):
         if not next_node.is_explored():
             depth_first_search_recursive(graph,next_node,current_label)
 
-
-
-
-
-
-
 class SCCFinder():
     def __init__(self,graph):
         self.graph = graph
@@ -42,7 +39,7 @@ class SCCFinder():
         self.new_f = {}
         self.leaders = {}
         self.curren_leader_node = None
-        self.time = 0
+        self.global_time = 0
         for label,node in enumerate(graph.get_nodes()):
             self.f[label+1] = node
 
@@ -52,21 +49,34 @@ class SCCFinder():
         self.dfs_loop(self.graph)
 
         
-    def dfs(self,graph,current_node):
-        
-        self.explored.add(current_node)
-        self.leaders[current_node] = self.curren_leader_node 
-        
-        for edge in graph.get_node_edges(current_node):
-            destination_node = edge.get_destination(current_node)
-            if not destination_node in self.explored:
-                self.dfs(graph,destination_node)
+    def dfs(self,graph,start_node):
+        self.explored.add(start_node)
+        search_stack = LifoQueue()
+        search_stack.put(start_node)
+        time_queue = Queue()
+        local_time = self.global_time
+        self.global_time +=1
+        local_time +=1
 
-        self.time +=1
-        self.new_f[self.time] = current_node
+        while not search_stack.empty():
+            next_node = search_stack.get()
+            self.leaders[self.curren_leader_node].add(next_node)
+            time_queue.put(next_node)
+            for edge in graph.get_node_edges(next_node):
+                destination = edge.get_destination(next_node)
+                if destination not in self.explored:
+                    self.explored.add(destination)
+                    self.global_time +=1
+                    local_time +=1
+                    search_stack.put(destination)
+
+        while not time_queue.empty():
+            next_node = time_queue.get()
+            self.new_f[local_time] = next_node
+            local_time -= 1
 
     def dfs_loop(self,graph):
-        self.time = 0
+        self.global_time = 0
         self.curren_leader_node = None
         self.leaders.clear()
         self.explored.clear()
@@ -74,7 +84,22 @@ class SCCFinder():
             current_node = self.f[label]
             if current_node not in self.explored:
                 self.curren_leader_node = current_node
+                self.leaders[self.curren_leader_node] = set()
                 self.dfs(graph,current_node)
-        self.f = deepcopy(self.new_f)
+        for label in self.new_f:
+            self.f[label] = self.new_f[label]
+        
         self.new_f.clear()
                 
+    def get_leaders(self):
+        return self.leaders.keys()
+    
+    def get_top_ordered_scc(self,top_n=5):
+
+        ordered_leaders = {leader:len(nodes) for leader,nodes in self.leaders.items()}
+        top_values = [ v for k, v in sorted(ordered_leaders.items(), key=lambda item: item[1],reverse=True)]
+
+        while len(top_values)< top_n:
+            top_values.append(0) 
+        
+        return top_values[:top_n]

@@ -25,15 +25,15 @@ def get_test_case(test_case_path):
 
 class RandomMinCutTest(unittest.TestCase):
     
-    # def test_coursera_test_cases(self):
-    #     test_cases_dir = "divide_and_conquer/week4/graph_contraction/test_cases/"
-    #     test_inputs = get_test_inputs(test_cases_dir)
-    #     for test_input in test_inputs:
-    #         print("Testing for "+test_input)
-    #         input_graph,min_cut_expected = get_test_case(test_input)
-    #         test_min_cut = random_contractions(input_graph)
-    #         self.assertEqual(min_cut_expected,len(test_min_cut.get_edges()))
-    #         print("Test OK")
+    def test_coursera_test_cases(self):
+        test_cases_dir = "divide_and_conquer/week4/graph_contraction/test_cases/"
+        test_inputs = get_test_inputs(test_cases_dir)
+        for test_input in test_inputs:
+            print("Testing for "+test_input)
+            input_graph,min_cut_expected = get_test_case(test_input)
+            test_min_cut = random_contractions(input_graph)
+            self.assertEqual(min_cut_expected,len(test_min_cut.get_edges()))
+            print("Test OK")
 
     def test_assignment(self):
 
