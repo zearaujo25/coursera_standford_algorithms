@@ -223,7 +223,6 @@ class TestGraph(unittest.TestCase):
                 self.assertEqual(2,len(node_edges),"node failed: {}, Edges: {} ".format(node.node_id,[str(edge) for edge in node_edges]))
             else:
                 raise Exception("Wrong Id")
-        print(str(test_case))
 
 if __name__ == "__main__":
     unittest.main()

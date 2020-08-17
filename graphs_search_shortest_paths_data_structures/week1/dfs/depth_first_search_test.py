@@ -2,7 +2,7 @@ import unittest
 from graph import Graph
 from node import Node
 from edge import Edge
-from depth_first_search import depth_first_search,depth_first_search_recursive,topological_sort,find_strongly_connected_components
+from depth_first_search import depth_first_search,depth_first_search_recursive,topological_sort,SCCFinder
 
 class TestDFS(unittest.TestCase):
 
@@ -90,7 +90,7 @@ class TestDFS(unittest.TestCase):
         self.assertTrue(test_nodes[2].get_distance() == 2 or test_nodes[2].get_distance() == 3)
         self.assertTrue(test_nodes[1].get_distance() == 2 or test_nodes[1].get_distance() == 3)
 
-    def find_strongly_connected_components_test(self):
+    def test_scc_finder(self):
         pass
 
 if __name__ == "__main__":
