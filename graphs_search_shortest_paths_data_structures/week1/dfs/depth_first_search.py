@@ -46,11 +46,7 @@ class SCCFinder():
 
     def find_strongly_connected_components(self):
         reversed_graph = self.graph.get_reversed()
-        print("starting reverse")
-        print(str(reversed_graph))
         self.dfs_loop(reversed_graph)
-        print("starting original")
-        print(str(self.graph))
         self.dfs_loop(self.graph)
 
     def dfs(self,graph,start_node):

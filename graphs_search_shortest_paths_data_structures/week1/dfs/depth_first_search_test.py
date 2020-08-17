@@ -151,16 +151,16 @@ class TestDFS(unittest.TestCase):
             self.assertEqual(leaders_expected,test_finder.get_top_ordered_scc(5))
             print("Test OK")
 
-    def test_assigment(self):
-        assigment_path = "graphs_search_shortest_paths_data_structures/week1/assignment_SCC.txt"
-        print("Testing for "+assigment_path)
-        input_graph = Graph(assigment_path,undirected=False)
-        print("input read")
-        test_finder = SCCFinder(input_graph)
-        test_finder.find_strongly_connected_components()
-        print("scc computed")
-        print(test_finder.get_top_ordered_scc(20))
-        print("Test OK")
+    # def test_assigment(self):
+    #     assigment_path = "graphs_search_shortest_paths_data_structures/week1/assignment_SCC.txt"
+    #     print("Testing for "+assigment_path)
+    #     input_graph = Graph(assigment_path,undirected=False)
+    #     print("input read")
+    #     test_finder = SCCFinder(input_graph)
+    #     test_finder.find_strongly_connected_components()
+    #     print("scc computed")
+    #     print(test_finder.get_top_ordered_scc(20))
+    #     print("Test OK")
 
 
 if __name__ == "__main__":
