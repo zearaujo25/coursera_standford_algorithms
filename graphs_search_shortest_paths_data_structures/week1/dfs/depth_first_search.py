@@ -1,6 +1,7 @@
 from queue import LifoQueue,Queue
+from collections import deque
 import sys 
-
+from time import sleep
 sys.setrecursionlimit(0x100000)
 
 
@@ -51,25 +52,29 @@ class SCCFinder():
 
     def dfs(self,graph,start_node):
         self.explored.add(start_node)
-        search_stack = LifoQueue()
-        search_stack.put(start_node)
-        time_stack = LifoQueue()
-        time_stack.put(start_node)
-
-        while not search_stack.empty():
-            next_node = search_stack.get()
-            time_stack.put(next_node)
-            self.leaders[self.curren_leader_node].add(next_node)
+        self.leaders[self.curren_leader_node].add(start_node)
+        search_stack = deque()
+        search_stack.append(start_node)
+        while len(search_stack)>0:
+            next_node = search_stack.pop()
+            is_done = True
+            next_node_not_re_stacked= True
             for edge in graph.get_node_edges(next_node):
                 destination = edge.get_destination(next_node)
                 if destination not in self.explored:
+                    if next_node_not_re_stacked:
+                        search_stack.append(next_node)
+                        next_node_not_re_stacked = False
+                    search_stack.append(destination)
+                    
                     self.explored.add(destination)
-                    search_stack.put(destination)
+                    self.leaders[self.curren_leader_node].add(destination)
+                    is_done = False
+                    break
 
-        while not time_stack.empty():   
-            next_node = time_stack.get()
-            self.global_time +=1  
-            self.new_f[self.global_time ] = next_node
+            if is_done:
+                self.global_time +=1  
+                self.new_f[self.global_time ] = next_node
 
     def dfs_loop(self,graph):
         self.global_time = 0

@@ -111,7 +111,7 @@ class TestDFS(unittest.TestCase):
 
     def test_scc_finder(self):
         test_graph = Graph()
-        test_nodes = [Node(node_id=i+1) for i in range(9)]
+        test_nodes = [Node(node_id=i+1) for i in range(14)]
         test_graph.add_nodes(test_nodes)
 
         #scc1
@@ -129,17 +129,50 @@ class TestDFS(unittest.TestCase):
         test_graph.add_direct_edge(test_nodes[7],Edge(test_nodes[7],test_nodes[8]))
         test_graph.add_direct_edge(test_nodes[8],Edge(test_nodes[8],test_nodes[6]))
 
+        #scc4 and scc5  and scc6 are lonley nodes
+
+
         #connecting scc
         test_graph.add_direct_edge(test_nodes[3],Edge(test_nodes[3],test_nodes[0]))
         test_graph.add_direct_edge(test_nodes[6],Edge(test_nodes[6],test_nodes[5]))
+        test_graph.add_direct_edge(test_nodes[9],Edge(test_nodes[9],test_nodes[8]))
+        test_graph.add_direct_edge(test_nodes[8],Edge(test_nodes[8],test_nodes[11]))
+        test_graph.add_direct_edge(test_nodes[11],Edge(test_nodes[11],test_nodes[12]))
+        test_graph.add_direct_edge(test_nodes[11],Edge(test_nodes[11],test_nodes[13]))
+        test_graph.add_direct_edge(test_nodes[12],Edge(test_nodes[12],test_nodes[13]))
 
         finder_test = SCCFinder(test_graph)
-
         finder_test.find_strongly_connected_components()
 
-        self.assertEqual(3,len(finder_test.get_leaders()))
+        self.assertEqual(8,len(finder_test.get_leaders()))
 
+    
+
+    def test_scc_specific_case(self):
+        test_graph = Graph()
+        test_nodes = [Node(node_id=i+1) for i in range(7)]
+        test_graph.add_nodes(test_nodes)
         
+        #scc1
+        test_graph.add_direct_edge(test_nodes[0],Edge(test_nodes[0],test_nodes[1]))
+        test_graph.add_direct_edge(test_nodes[1],Edge(test_nodes[1],test_nodes[2]))
+        test_graph.add_direct_edge(test_nodes[2],Edge(test_nodes[2],test_nodes[0]))
+
+
+        #connecting scc
+        test_graph.add_direct_edge(test_nodes[0],Edge(test_nodes[0],test_nodes[3]))
+        test_graph.add_direct_edge(test_nodes[3],Edge(test_nodes[3],test_nodes[4]))
+        test_graph.add_direct_edge(test_nodes[4],Edge(test_nodes[4],test_nodes[5]))
+        test_graph.add_direct_edge(test_nodes[3],Edge(test_nodes[3],test_nodes[5]))
+        test_graph.add_direct_edge(test_nodes[6],Edge(test_nodes[6],test_nodes[1]))
+
+        finder_test = SCCFinder(test_graph)
+        finder_test.find_strongly_connected_components()
+
+        self.assertEqual(5,len(finder_test.get_leaders()))
+
+
+
     def test_coursera_test_cases(self):
         test_cases_dir = "graphs_search_shortest_paths_data_structures/week1/assignment1SCC"
         test_inputs = get_test_inputs(test_cases_dir)
@@ -151,16 +184,16 @@ class TestDFS(unittest.TestCase):
             self.assertEqual(leaders_expected,test_finder.get_top_ordered_scc(5))
             print("Test OK")
 
-    # def test_assigment(self):
-    #     assigment_path = "graphs_search_shortest_paths_data_structures/week1/assignment_SCC.txt"
-    #     print("Testing for "+assigment_path)
-    #     input_graph = Graph(assigment_path,undirected=False)
-    #     print("input read")
-    #     test_finder = SCCFinder(input_graph)
-    #     test_finder.find_strongly_connected_components()
-    #     print("scc computed")
-    #     print(test_finder.get_top_ordered_scc(20))
-    #     print("Test OK")
+    def test_assigment(self):
+        assigment_path = "graphs_search_shortest_paths_data_structures/week1/assignment_SCC.txt"
+        print("Testing for "+assigment_path)
+        input_graph = Graph(assigment_path,undirected=False)
+        print("input read")
+        test_finder = SCCFinder(input_graph)
+        test_finder.find_strongly_connected_components()
+        print("scc computed")
+        print(test_finder.get_top_ordered_scc(20))
+        print("Test OK")
 
 
 if __name__ == "__main__":

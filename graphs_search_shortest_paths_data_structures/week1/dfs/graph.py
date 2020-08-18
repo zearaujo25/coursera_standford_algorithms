@@ -85,9 +85,11 @@ class Graph:
         with open(graph_path) as f: 
             seen_nodes = {}
             seen_edges = {}
+            max_id = float("-inf")
             for line in f: 
                 line_nodes = line.split()
                 node_id = int(line_nodes[0])
+                max_id = max_id if max_id > node_id else node_id
                 if node_id not in seen_nodes.keys():
                     line_node = Node(node_id=node_id)
                     self.add_node(line_node)
@@ -110,6 +112,8 @@ class Graph:
                         else:
                             self.add_direct_edge(seen_nodes[node_id],new_edge)
                         seen_edges[node_id].append(edge_node_id)
+        while len(self.adjacent_list.keys()) < max_id:
+            self.add_node(Node())
                         
 
     def __str__(self):
