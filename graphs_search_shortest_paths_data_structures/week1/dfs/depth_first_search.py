@@ -53,28 +53,23 @@ class SCCFinder():
         self.explored.add(start_node)
         search_stack = LifoQueue()
         search_stack.put(start_node)
-        time_queue = Queue()
-        local_time = self.global_time
-        self.global_time +=1
-        local_time +=1
-
+        time_stack = LifoQueue()
+        time_stack.put(start_node)
 
         while not search_stack.empty():
             next_node = search_stack.get()
+            time_stack.put(next_node)
             self.leaders[self.curren_leader_node].add(next_node)
-            time_queue.put(next_node)
             for edge in graph.get_node_edges(next_node):
                 destination = edge.get_destination(next_node)
                 if destination not in self.explored:
                     self.explored.add(destination)
-                    self.global_time +=1
-                    local_time +=1
                     search_stack.put(destination)
 
-        while not time_queue.empty():
-            next_node = time_queue.get()
-            self.new_f[local_time] = next_node
-            local_time -= 1
+        while not time_stack.empty():   
+            next_node = time_stack.get()
+            self.global_time +=1  
+            self.new_f[self.global_time ] = next_node
 
     def dfs_loop(self,graph):
         self.global_time = 0
