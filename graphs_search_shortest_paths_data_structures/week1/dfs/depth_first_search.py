@@ -59,13 +59,11 @@ class SCCFinder():
             next_node = search_stack.pop()
             #A node only will be done if all its adjacents are explored
             is_done = True
-            next_node_not_re_stacked= True
+            
             for edge in graph.get_node_edges(next_node):
                 destination = edge.get_destination(next_node)
                 if destination not in self.explored:
-                    if next_node_not_re_stacked:
-                        search_stack.append(next_node)
-                        next_node_not_re_stacked = False
+                    search_stack.append(next_node)
                     search_stack.append(destination)
                     
                     self.explored.add(destination)
