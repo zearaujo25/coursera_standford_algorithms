@@ -57,6 +57,7 @@ class SCCFinder():
         search_stack.append(start_node)
         while len(search_stack)>0:
             next_node = search_stack.pop()
+            #A node only will be done if all its adjacents are explored
             is_done = True
             next_node_not_re_stacked= True
             for edge in graph.get_node_edges(next_node):
@@ -70,6 +71,7 @@ class SCCFinder():
                     self.explored.add(destination)
                     self.leaders[self.curren_leader_node].add(destination)
                     is_done = False
+                    #you cant explore other nodes withou finishin the new one, so we exit the loop
                     break
 
             if is_done:
