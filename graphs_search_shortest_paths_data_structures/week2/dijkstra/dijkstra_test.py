@@ -6,14 +6,15 @@ def read_graph(graph_path,sep=" "):
     graph = {}
     with open(graph_path) as f: 
         for line in f: 
-            split_line = line.split(sep=sep)
+            split_line = line.strip("\n").split(sep=sep)
             node = int(split_line[0])
             graph[node] = set()
             for edge in split_line[1:]:
                 converted_edge = edge.split(",")
-                head_node = int(converted_edge[0])
-                weight = int(converted_edge[1])
-                graph[node].add((head_node,weight))
+                if(len(converted_edge) > 1):
+                    head_node = int(converted_edge[0])
+                    weight = int(converted_edge[1])
+                    graph[node].add((head_node,weight))
     return graph
 
 def get_assignment_answer(test_distance_result):
@@ -56,16 +57,16 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual([8,7],result_paths[7])
         self.assertEqual([8],result_paths[8])    
 
-    def test_dijkstra_coursera_test_cases(self):
-        inputs = get_test_inputs("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/coursera_tests")
-        for test_input in inputs:
-            print("Testing "+ test_input)
-            test_case = read_graph(test_input,"\t")
-            expected = read_output(test_input)
-            result_distances = dijkstra(test_case,1)[0]
-            final_answer = get_assignment_answer(result_distances)
-            self.assertEqual(expected,final_answer)
-            print("Test OK")
+    # def test_dijkstra_coursera_test_cases(self):
+    #     inputs = get_test_inputs("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/coursera_tests")
+    #     for test_input in inputs:
+    #         print("Testing "+ test_input)
+    #         test_case = read_graph(test_input,"\t")
+    #         expected = read_output(test_input)
+    #         result_distances = dijkstra(test_case,1)[0]
+    #         final_answer = get_assignment_answer(result_distances)
+    #         self.assertEqual(expected,final_answer)
+    #         print("Test OK")
 
     def test_assigment(self):
         print("Testing Assigment")
