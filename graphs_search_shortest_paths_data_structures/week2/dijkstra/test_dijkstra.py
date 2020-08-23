@@ -57,23 +57,23 @@ class TestDijkstra(unittest.TestCase):
         self.assertEqual([8,7],result_paths[7])
         self.assertEqual([8],result_paths[8])    
 
-    # def test_dijkstra_coursera_test_cases(self):
-    #     inputs = get_test_inputs("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/coursera_tests")
-    #     for test_input in inputs:
-    #         print("Testing "+ test_input)
-    #         test_case = read_graph(test_input,"\t")
-    #         expected = read_output(test_input)
-    #         result_distances = dijkstra(test_case,1)[0]
-    #         final_answer = get_assignment_answer(result_distances)
-    #         self.assertEqual(expected,final_answer)
-    #         print("Test OK")
+    def test_dijkstra_coursera_test_cases(self):
+        inputs = get_test_inputs("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/coursera_tests")
+        for test_input in inputs:
+            print("Testing "+ test_input)
+            test_case = read_graph(test_input,"\t")
+            expected = read_output(test_input)
+            result_distances = dijkstra(test_case,1)[0]
+            final_answer = get_assignment_answer(result_distances)
+            self.assertEqual(expected,final_answer)
+            print("Test OK")
 
-    def test_assigment(self):
-        print("Testing Assigment")
-        test_case = read_graph("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/assigment.txt","\t")
-        result_distances = dijkstra(test_case,1)[0]
-        print(get_assignment_answer(result_distances))
-        print("Test OK")
+    # def test_assigment(self):
+    #     print("Testing Assigment")
+    #     test_case = read_graph("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/assigment.txt","\t")
+    #     result_distances = dijkstra(test_case,1)[0]
+    #     print(get_assignment_answer(result_distances))
+    #     print("Test OK")
 
 if __name__ == "__main__":
     unittest.main()
