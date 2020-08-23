@@ -7,7 +7,7 @@ def dijkstra(graph,s):
     paths[s] = []
     visited_nodes.add(s)
     while len(visited_nodes) != len(graph.keys()):
-            next_node, next_distance, next_path = get_next_node(visited_nodes, distances,paths,graph)
+            next_node, next_distance, next_path = get_next_visited(visited_nodes, distances,paths,graph)
             if next_node is None:
                 break
             visited_nodes.add(next_node)
@@ -16,7 +16,7 @@ def dijkstra(graph,s):
 
     return distances,paths
 
-def get_next_node(visited_nodes, distances, paths,graph):
+def get_next_visited(visited_nodes, distances, paths,graph):
     source_node = None
     next_node = None
     next_distance = float("inf")
