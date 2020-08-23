@@ -1,15 +1,13 @@
 from heapq import heappush, heappop,heapify
 
 def dijkstra_heap(graph,s):
-    visited_nodes = set()
     distances = {}
     distances[s] = 0
-    visited_nodes.add(s)
     heap = []
     heap_position = {}
     update_heap(graph, s, distances, heap_position, heap)
-    while len(visited_nodes) != len(graph):
-            node_weight_visited = visit_next_node(visited_nodes, distances,graph,heap,heap_position)
+    while len(distances) != len(graph):
+            node_weight_visited = visit_next_node(distances,graph,heap,heap_position)
             if node_weight_visited is None:
                 #no reachable node
                 break
@@ -38,12 +36,11 @@ def update_position_dictionary(heap, heap_position):
     for position,weigh_node in enumerate(heap):
         heap_position[weigh_node[1]] = position 
 
-def visit_next_node(visited_nodes,distances,graph,heap,heap_position):
+def visit_next_node(distances,graph,heap,heap_position):
     if len(heap) < 1:
         return None
     next_weight_node_visited = heappop(heap)
     update_position_dictionary(heap, heap_position)
-    visited_nodes.add(next_weight_node_visited[1])
     distances[next_weight_node_visited[1]] = next_weight_node_visited[0]
     update_heap(graph, next_weight_node_visited[1], distances, heap_position, heap)
     return next_weight_node_visited
