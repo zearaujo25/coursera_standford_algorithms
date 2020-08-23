@@ -8,9 +8,12 @@ def dijkstra(graph,s):
     visited_nodes.add(s)
     while len(visited_nodes) != len(graph.keys()):
             next_node, next_distance, next_path = get_next_node(visited_nodes, distances,paths,graph)
+            if next_node is None:
+                break
             visited_nodes.add(next_node)
             distances[next_node] = next_distance
             paths[next_node] = next_path
+
     return distances,paths
 
 def get_next_node(visited_nodes, distances, paths,graph):
@@ -27,9 +30,10 @@ def get_next_node(visited_nodes, distances, paths,graph):
                 source_node = node
                 next_distance = distances[node] + edge[1]
                 min_edge = edge
-    
-    next_path = paths[source_node].copy()
-    next_path.append(min_edge[0])
+
+    if next_node is not None:
+        next_path = paths[source_node].copy()
+        next_path.append(min_edge[0])
 
     return next_node, next_distance, next_path
                 
