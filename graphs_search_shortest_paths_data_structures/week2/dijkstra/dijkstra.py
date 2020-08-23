@@ -24,9 +24,9 @@ def get_next_node(visited_nodes, distances, paths,graph):
     min_edge = None
     for node in visited_nodes:
         for edge in graph[node]:
-            end_node = edge[0]
-            if distances[node] + edge[1] < next_distance and end_node not in visited_nodes:
-                next_node = end_node
+            head_node = edge[0]
+            if distances[node] + edge[1] < next_distance and head_node not in visited_nodes:
+                next_node = head_node
                 source_node = node
                 next_distance = distances[node] + edge[1]
                 min_edge = edge
