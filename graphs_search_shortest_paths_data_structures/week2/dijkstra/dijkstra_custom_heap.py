@@ -4,16 +4,15 @@ def dijkstra_custom_heap(graph,s):
     distances = {}
     distances[s] = 0
     heap = Heap(heap_type='min')
-    heap_position = {}
-    update_heap(graph, s, distances, heap_position, heap)
+    update_heap(graph, s, distances, heap)
     while len(distances) != len(graph):
-            node_weight_visited = visit_next_node(distances,graph,heap,heap_position)
+            node_weight_visited = visit_next_node(distances,graph,heap)
             if node_weight_visited is None:
                 #no reachable node
                 break
     return distances
 
-def update_heap(graph, next_node, distances, heap_position, heap):
+def update_heap(graph, next_node, distances, heap):
     for edge in graph[next_node]:
         node = edge[0]
         weight = edge[1]
@@ -30,12 +29,12 @@ def update_heap(graph, next_node, distances, heap_position, heap):
         else:
             heap.heap_insert(new_score_node)
 
-def visit_next_node(distances,graph,heap,heap_position):
-    if len(heap) < 1:
+def visit_next_node(distances,graph,heap):
+    if len(heap.heap) < 1:
         return None
     next_weight_node_visited = heap.heap_pop()
     distances[next_weight_node_visited[1]] = next_weight_node_visited[0]
-    update_heap(graph, next_weight_node_visited[1], distances, heap_position, heap)
+    update_heap(graph, next_weight_node_visited[1], distances, heap)
     return next_weight_node_visited
 
 if __name__ == "__main__":
