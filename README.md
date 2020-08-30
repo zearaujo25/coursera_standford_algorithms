@@ -1,2 +1,2 @@
 # coursera_standford_algorithms
-Repositroy for coursera standford algorithms course
+Repository for coursera standford algorithms course
