@@ -13,23 +13,23 @@ class Heap():
         parent = self.heap[(self.position_map[node_weight[0]]+1)//2 -1]
         should_swap =  node_weight[1] < parent[1] if self.heap_type == 'min' else node_weight[1] > parent[1]
         while should_swap and self.position_map[node_weight[0]] != 0:
-            self.swap_elements((node_weight[0],parent[0]))
+            self.swap_elements((node_weight,parent))
             parent = self.heap[(self.position_map[node_weight[0]]+1)//2 -1]
             should_swap =  node_weight[1] < parent[1] if self.heap_type == 'min' else node_weight[1] > parent[1]
 
     def swap_elements(self,elements):
-        positions = self.position_map[elements[0]],self.position_map[elements[1]]
+        positions = self.position_map[elements[0][0]],self.position_map[elements[1][0]]
 
         self.heap[positions[0]] = elements[1]
         self.heap[positions[1]] = elements[0]
 
-        self.position_map[elements[0]] = positions[1]
-        self.position_map[elements[1]] = positions[0]
+        self.position_map[elements[0][0]] = positions[1]
+        self.position_map[elements[1][0]] = positions[0]
 
     def heap_pop(self):
-        self.swap_elements((self.heap[0][0],self.heap[-1][0]))
+        self.swap_elements((self.heap[0],self.heap[-1]))
         popped_element = self.heap.pop()
-        self.position_map.pop(popped_element)
+        self.position_map.pop(popped_element[0])
         if len(self.heap) >1:
             self.bubble_down(self.heap[0])
         return popped_element
