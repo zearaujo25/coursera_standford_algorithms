@@ -80,6 +80,39 @@ class TestHeap(unittest.TestCase):
         while len(test_heap.heap) > 0:
             test_answer.append(test_heap.heap_pop())
         self.assertEqual(correct_order,test_answer) 
+    
+    def test_assigment(self):
+        heap_low = Heap(heap_type='max')
+        heap_high = Heap(heap_type='min')
+        medians = []
+        counter = 0
+        assigment_path = 'graphs_search_shortest_paths_data_structures/week3/heap/assignment/assignment.txt'
+        with open(assigment_path) as f: 
+            for line in f: 
+                counter += 1 
+                number = int(line)
+                if len(heap_low.heap) == 0:
+                    heap_low.heap_insert(number)
+                elif number < heap_low.heap[0]:
+                    heap_low.heap_insert(number)
+                elif len(heap_high.heap) == 0:
+                    heap_high.heap_insert(number)
+                elif number > heap_high.heap[0]:
+                    heap_high.heap_insert(number)
+                else:
+                    heap_low.heap_insert(number)
+            
+                while len(heap_low.heap) > len(heap_high.heap):
+                    heap_high.heap_insert(heap_low.heap_pop())
+
+                while len(heap_low.heap) < len(heap_high.heap):
+                    heap_low.heap_insert(heap_high.heap_pop())
+                
+                medians.append(heap_low.heap[0])
+        print(sum(medians)%10000)
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
