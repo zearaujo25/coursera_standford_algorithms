@@ -23,7 +23,7 @@ def update_heap(graph, next_node, distances, heap_position, heap):
             continue
         if node in heap.position_map:
             #update heap
-            element_in_heap = heap.get_node_element[node]
+            element_in_heap = heap.get_node_element(node)
             heap.heap_delete(element_in_heap)
             element_to_insert = new_score_node if new_score_node[1] < element_in_heap[1] else element_in_heap
             heap.heap_insert(element_to_insert)
