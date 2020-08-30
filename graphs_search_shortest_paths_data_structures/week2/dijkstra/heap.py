@@ -56,7 +56,7 @@ class Heap():
         element_position = self.position_map[element[0]]
         self.swap_elements((element,self.heap[-1]))
         self.heap.pop()
-        self.position_map.pop(element)
+        self.position_map.pop(element[0])
         if len(self.heap) >1:
             self.bubble_down(self.heap[element_position])
 
