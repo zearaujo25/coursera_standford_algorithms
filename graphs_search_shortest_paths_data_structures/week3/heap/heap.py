@@ -34,7 +34,7 @@ def bubble_down(heap,position_map,element,heap_type='min'):
     should_swap =  element > child_to_swap if heap_type == 'min' else element < child_to_swap
     while should_swap:
         swap_elements(heap,position_map,(element,child_to_swap))
-        child_to_swap = get_swap_child(position_map, element, heap)
+        child_to_swap = get_swap_child(position_map, element, heap,heap_type)
         should_swap =  element > child_to_swap if heap_type == 'min' else element < child_to_swap
 
 def get_swap_child(position_map, element, heap,heap_type='min'):
