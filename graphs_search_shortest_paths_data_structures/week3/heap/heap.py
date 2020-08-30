@@ -105,8 +105,8 @@ class Heap():
             right_child = self.heap[(self.position_map[element]+1)*2] if (self.position_map[element]+1)*2 < len(self.heap) else float("inf")
             return min(left_child,right_child)
         else:
-            left_child = self.heap[(self.position_map[element]+1)*2-1] if (self.position_map[self.element]+1)*2-1 < len(self.heap) else float("-inf")
-            right_child = self.heap[(self.position_map[element]+1)*2] if (self.position_map[self.element]+1)*2 < len(self.heap) else float("-inf")
+            left_child = self.heap[(self.position_map[element]+1)*2-1] if (self.position_map[element]+1)*2-1 < len(self.heap) else float("-inf")
+            right_child = self.heap[(self.position_map[element]+1)*2] if (self.position_map[element]+1)*2 < len(self.heap) else float("-inf")
             return max(left_child,right_child)
 
     def heap_delete(self,element):
