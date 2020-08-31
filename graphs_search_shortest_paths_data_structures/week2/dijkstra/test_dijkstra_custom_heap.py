@@ -39,7 +39,6 @@ class TestDijkstra(unittest.TestCase):
     def test_dijkstra(self):
         test_case = read_graph("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/test_case_1.txt"," ")
         result_distances = dijkstra_custom_heap(test_case,1)
-        print(result_distances)
         self.assertEqual(0,result_distances[1])
         self.assertEqual(1,result_distances[2])
         self.assertEqual(2,result_distances[3])
@@ -61,12 +60,12 @@ class TestDijkstra(unittest.TestCase):
             self.assertEqual(expected,final_answer)
             print("Test OK")
 
-    # def test_assigment(self):
-    #     print("Testing Assigment")
-    #     test_case = read_graph("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/assigment.txt","\t")
-    #     result_distances = dijkstra_heap(test_case,1)[0]
-    #     print(get_assignment_answer(result_distances))
-    #     print("Test OK")
+    def test_assigment(self):
+        print("Testing Assigment")
+        test_case = read_graph("graphs_search_shortest_paths_data_structures/week2/dijkstra/test_cases/assigment.txt","\t")
+        result_distances = dijkstra_custom_heap(test_case,1)
+        print(get_assignment_answer(result_distances))
+        print("Test OK")
 
 if __name__ == "__main__":
     unittest.main()

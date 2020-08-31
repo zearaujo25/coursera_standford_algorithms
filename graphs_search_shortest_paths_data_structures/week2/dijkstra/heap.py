@@ -52,13 +52,17 @@ class Heap():
             right_child = self.heap[(self.position_map[element[0]]+1)*2] if (self.position_map[element[0]]+1)*2 < len(self.heap) else (None,float("-inf"))
             return left_child if left_child[1] >= right_child[1] else right_child
 
-    def heap_delete(self,element):
-        element_position = self.position_map[element[0]]
-        self.swap_elements((element,self.heap[-1]))
-        self.heap.pop()
-        self.position_map.pop(element[0])
-        if len(self.heap) >1:
-            self.bubble_down(self.heap[element_position])
+    def heap_delete(self,element):       
+        if element != self.heap[-1]:
+            element_position = self.position_map[element[0]]
+            self.swap_elements((element,self.heap[-1]))
+            self.heap.pop()
+            self.position_map.pop(element[0])
+            if len(self.heap) >1:
+                self.bubble_down(self.heap[element_position])
+        else:
+            self.heap.pop()
+            self.position_map.pop(element[0])
 
     def get_node_element(self,node):
         return self.heap[self.position_map[node]]

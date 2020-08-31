@@ -17,7 +17,7 @@ def update_heap(graph, next_node, distances, heap):
         node = edge[0]
         weight = edge[1]
         node_score = distances[next_node] +weight
-        new_score_node = (node_score,node)
+        new_score_node = (node,node_score)
         if node in distances:
             continue
         if node in heap.position_map:
@@ -33,8 +33,8 @@ def visit_next_node(distances,graph,heap):
     if len(heap.heap) < 1:
         return None
     next_weight_node_visited = heap.heap_pop()
-    distances[next_weight_node_visited[1]] = next_weight_node_visited[0]
-    update_heap(graph, next_weight_node_visited[1], distances, heap)
+    distances[next_weight_node_visited[0]] = next_weight_node_visited[1]
+    update_heap(graph, next_weight_node_visited[0], distances, heap)
     return next_weight_node_visited
 
 if __name__ == "__main__":
