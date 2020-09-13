@@ -1,41 +1,35 @@
 from heap import Heap
-#this algorythm is O(m*n) because it needs to update all the references of the heap everytime there is a heapfy. to make a true mlogn, it is needed to ahve a custome heap that updates the reference at the same time heapfy goes
+
 def prim_custom_heap(graph,s):
-    distances = {}
-    distances[s] = 0
+    minimum_spanning_tree = {}
+    minimum_spanning_tree[s] = []
     heap = Heap(heap_type='min')
-    update_heap(graph, s, distances, heap)
-    while len(distances) != len(graph):
-            node_weight_visited = visit_next_node(distances,graph,heap)
-            if node_weight_visited is None:
+    update_heap(graph, s, minimum_spanning_tree, heap)
+    while len(minimum_spanning_tree) != len(graph):
+            edge_visited = visit_next_node(minimum_spanning_tree,graph,heap)
+            if edge_visited is None:
                 #no reachable node
                 break
-    return distances
+    return minimum_spanning_tree
 
-def update_heap(graph, next_node, distances, heap):
-    for edge in graph[next_node]:
+def update_heap(graph, origin_node, minimum_spanning_tree, heap):
+    for edge in graph[origin_node]:
         node = edge[0]
-        weight = edge[1]
-        node_score = distances[next_node] +weight
-        new_score_node = (node,node_score)
-        if node in distances:
+        if node in minimum_spanning_tree:
             continue
-        if node in heap.position_map:
-            #update heap
-            element_in_heap = heap.get_node_element(node)
-            heap.heap_delete(element_in_heap)
-            element_to_insert = new_score_node if new_score_node[1] < element_in_heap[1] else element_in_heap
-            heap.heap_insert(element_to_insert)
         else:
-            heap.heap_insert(new_score_node)
+            heap.heap_insert(edge+(origin_node,))
 
-def visit_next_node(distances,graph,heap):
+def visit_next_node(minimun_spanning_tree,graph,heap):
     if len(heap.heap) < 1:
         return None
-    next_weight_node_visited = heap.heap_pop()
-    distances[next_weight_node_visited[0]] = next_weight_node_visited[1]
-    update_heap(graph, next_weight_node_visited[0], distances, heap)
-    return next_weight_node_visited
+    edge = heap.heap_pop()
+    origin_node = edge[2]
+    destination_node = edge[0]
+    minimun_spanning_tree[destination_node] = []
+    minimun_spanning_tree[origin_node].append(edge[:2])
+    update_heap(graph, destination_node, minimun_spanning_tree, heap)
+    return edge
 
 if __name__ == "__main__":
     pass

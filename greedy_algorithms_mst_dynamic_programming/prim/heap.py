@@ -4,18 +4,18 @@ class Heap():
         self.position_map = {}
         self.heap_type = heap_type
 
-    def heap_insert(self,node_weight):
-        self.heap.append(node_weight)
-        self.position_map[node_weight[0]] = len(self.heap)-1
-        self.bubble_up(node_weight)
+    def heap_insert(self,edge):
+        self.heap.append(edge)
+        self.position_map[edge[0]] = len(self.heap)-1
+        self.bubble_up(edge)
 
-    def bubble_up(self,node_weight):
-        parent = self.heap[(self.position_map[node_weight[0]]+1)//2 -1]
-        should_swap =  node_weight[1] < parent[1] if self.heap_type == 'min' else node_weight[1] > parent[1]
-        while should_swap and self.position_map[node_weight[0]] != 0:
-            self.swap_elements((node_weight,parent))
-            parent = self.heap[(self.position_map[node_weight[0]]+1)//2 -1]
-            should_swap =  node_weight[1] < parent[1] if self.heap_type == 'min' else node_weight[1] > parent[1]
+    def bubble_up(self,edge):
+        parent = self.heap[(self.position_map[edge[0]]+1)//2 -1]
+        should_swap =  edge[1] < parent[1] if self.heap_type == 'min' else edge[1] > parent[1]
+        while should_swap and self.position_map[edge[0]] != 0:
+            self.swap_elements((edge,parent))
+            parent = self.heap[(self.position_map[edge[0]]+1)//2 -1]
+            should_swap =  edge[1] < parent[1] if self.heap_type == 'min' else edge[1] > parent[1]
 
     def swap_elements(self,elements):
         positions = self.position_map[elements[0][0]],self.position_map[elements[1][0]]
