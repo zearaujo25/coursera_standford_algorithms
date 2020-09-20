@@ -7,8 +7,8 @@ def read_cluster_graph(graph_path):
     cluster_graph = ClusterNodesOnly()
     with open(graph_path) as f: 
         for line in f: 
-            node_bits = line.strip("\n").strip(" ")
-            if len(node_bits) < 24:
+            node_bits = line.strip("\n").split(" ")
+            if len(node_bits) == 2:
                 continue
             cluster_graph.add_node(node_bits)
 
@@ -39,14 +39,12 @@ class TestClusterGraph(unittest.TestCase):
     def test_coursera_question1(self):
         inputs = get_test_inputs("greedy_algorithms_mst_dynamic_programming/week2/clustering/test_cases/question2")
         for test_input in inputs:
-            test_input = "greedy_algorithms_mst_dynamic_programming/week2/clustering/test_cases/question2/input_random_1_4_14.txt"
             print("Testing "+ test_input)
             test_case = read_cluster_graph(test_input)
             expected = read_output(test_input)
             final_answer = test_case.clusterfy()
             self.assertEqual(expected,final_answer)
             print("Test OK")
-            break
     def test_assigment2(self):
         test_input = 'greedy_algorithms_mst_dynamic_programming/week2/clustering/assigment2.txt'
         print("Testing Assigment")
