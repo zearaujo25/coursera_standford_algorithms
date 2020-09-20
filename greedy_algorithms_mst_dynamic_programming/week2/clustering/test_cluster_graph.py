@@ -50,7 +50,7 @@ class TestClusterGraph(unittest.TestCase):
             self.assertEqual(expected,final_answer)
             print("Test OK")
 
-    def test_assigment2(self):
+    def test_assigment1(self):
         test_input = 'greedy_algorithms_mst_dynamic_programming/week2/clustering/assigment1.txt'
         print("Testing Assigment")
         test_case = read_cluster_graph(test_input," ")
