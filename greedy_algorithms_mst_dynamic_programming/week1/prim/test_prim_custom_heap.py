@@ -58,25 +58,25 @@ class TestPrim(unittest.TestCase):
     def test_prim_coursera_test_cases(self):
         inputs = get_test_inputs("greedy_algorithms_mst_dynamic_programming/prim/tests_cases")
         for test_input in inputs:
-            test_input = 'greedy_algorithms_mst_dynamic_programming/prim/tests_cases/input_random_10_40.txt'
+            # test_input = 'greedy_algorithms_mst_dynamic_programming/prim/tests_cases/input_random_13_40.txt'
             print("Testing "+ test_input)
             test_case = read_graph(test_input," ")
-            print(test_case)
+            # print(test_case)
             expected = read_output(test_input)
             result_mst = prim_custom_heap(test_case,1)
-            print(result_mst)
+            # print(result_mst)
             final_answer = get_assignment_answer(result_mst)
             self.assertEqual(expected,final_answer)
             print("Test OK")
-            break
+            # break
             
 
-    def test_assigment(self):
-        print("Testing Assigment")
-        test_case = read_graph("greedy_algorithms_mst_dynamic_programming/prim/assigment.txt"," ")
-        result_distances = prim_custom_heap(test_case,1)
-        print(get_assignment_answer(result_distances))
-        print("Test OK")
+    # def test_assigment(self):
+    #     print("Testing Assigment")
+    #     test_case = read_graph("greedy_algorithms_mst_dynamic_programming/prim/assigment.txt"," ")
+    #     result_distances = prim_custom_heap(test_case,1)
+    #     print(get_assignment_answer(result_distances))
+    #     print("Test OK")
 
 if __name__ == "__main__":
     unittest.main()

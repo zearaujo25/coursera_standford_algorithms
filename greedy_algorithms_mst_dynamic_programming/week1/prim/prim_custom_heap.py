@@ -13,12 +13,13 @@ def prim_custom_heap(graph,s):
     return minimum_spanning_tree
 
 def update_heap(graph, origin_node, minimum_spanning_tree, heap):
+    # print("Expanding frontier for node {}".format(origin_node))
     for edge in graph[origin_node]:
         node = edge[0]
         if node in minimum_spanning_tree:
             continue
         else:
-            print("Adding node: {}".format(node))
+            # print("Adding edge to heap: {}".format(edge+(origin_node,)))
             heap.heap_insert(edge+(origin_node,))
 
 def visit_next_node(minimun_spanning_tree,graph,heap): 
@@ -35,6 +36,7 @@ def visit_next_node(minimun_spanning_tree,graph,heap):
         origin_node = edge[2]
         weight = edge[1]
         destination_node = edge[0]
+    # print("Next edge: {}".format(edge))
     minimun_spanning_tree[destination_node] = set()
     minimun_spanning_tree[destination_node].add((origin_node,weight))
     minimun_spanning_tree[origin_node].add(edge[:2])
