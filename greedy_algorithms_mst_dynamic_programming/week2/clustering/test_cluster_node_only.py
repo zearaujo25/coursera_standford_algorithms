@@ -45,6 +45,7 @@ class TestClusterGraph(unittest.TestCase):
             final_answer = test_case.clusterfy()
             self.assertEqual(expected,final_answer)
             print("Test OK")
+            
     def test_assigment2(self):
         test_input = 'greedy_algorithms_mst_dynamic_programming/week2/clustering/assigment2.txt'
         print("Testing Assigment")
