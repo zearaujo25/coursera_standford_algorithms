@@ -31,11 +31,11 @@ def get_test_inputs(path):
 def read_output(test_case_path):
     with open(test_case_path.replace("input","output")) as f: 
         for answer in f: 
-            return answer
+            return answer.strip("\n")
 
 class TestWIS(unittest.TestCase):
     def test_coursera_cases(self):
-        test_cases_path = 'greedy_algorithms_mst_dynamic_programming/week3/test_cases/huffman'
+        test_cases_path = 'greedy_algorithms_mst_dynamic_programming/week3/test_cases/wis'
         test__files = get_test_inputs(test_cases_path)
         for test_input in test__files:
 
@@ -50,18 +50,15 @@ class TestWIS(unittest.TestCase):
 
             print("Test OK")
 
-    # def test_assigment_1_2(self):
-    #     print("Testing Assigment")
-    #     test_input = 'greedy_algorithms_mst_dynamic_programming/week3/assigment1_2.txt'
-    #     test_case = read_input(test_input)
+    def test_assigment_3(self):
+        print("Testing Assigment")
+        test_input = 'greedy_algorithms_mst_dynamic_programming/week3/assigment3.txt'
+        test_case = read_input(test_input)
             
-    #     test_case.huffman_encode()
-    #     encoding_map = test_case.create_encode_map_string()
-    #     final_answer = get_assignment_answer(encoding_map)
+        result  = wis(test_case)
+        final_answer = get_assignment_answer(result)
 
-            
-
-    #     print("Final Answer: {}".format(final_answer))
+        print("Final Answer: {}".format(final_answer))
 
 
 if __name__ == "__main__":
