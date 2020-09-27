@@ -17,9 +17,16 @@ def read_huffman(symbols_path):
     
     return huffman
 
-def get_assignment_answer(result_graph):
+def get_assignment_answer(result_encoding):
+    min_len = float("inf")
+    max_len = float("-inf")
+    for symbol in result_encoding:
 
-    return result_graph.get_maximum_spacing()
+        symbol_len = len(result_encoding[symbol])
+        min_len = len(result_encoding[symbol]) if symbol_len < min_len else min_len 
+        max_len = len(result_encoding[symbol]) if symbol_len > max_len else max_len 
+
+    return [max_len,min_len]
 
 def get_test_inputs(path):
     inputs = []
@@ -41,17 +48,31 @@ class TestHuffman(unittest.TestCase):
         test_cases_path = 'greedy_algorithms_mst_dynamic_programming/week3/test_cases/huffman'
         test__files = get_test_inputs(test_cases_path)
         for test_input in test__files:
+
             print("Testing "+ test_input)
             test_case = read_huffman(test_input)
             expected = read_output(test_input)
             
             test_case.huffman_encode()
-            
+            encoding_map = test_case.create_encode_map_string()
+            final_answer = get_assignment_answer(encoding_map)
 
-            # self.assertEqual(expected,final_answer)
+            self.assertEqual(expected,final_answer)
 
             print("Test OK")
+
+    def test_assigment_1_2(self):
+        print("Testing Assigment")
+        test_input = 'greedy_algorithms_mst_dynamic_programming/week3/assigment1_2.txt'
+        test_case = read_huffman(test_input)
             
+        test_case.huffman_encode()
+        encoding_map = test_case.create_encode_map_string()
+        final_answer = get_assignment_answer(encoding_map)
+
+            
+
+        print("Final Answer: {}".format(final_answer))
 
 
 if __name__ == "__main__":
