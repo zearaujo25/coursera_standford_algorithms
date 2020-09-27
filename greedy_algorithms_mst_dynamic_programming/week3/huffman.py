@@ -1,4 +1,5 @@
 from heap import Heap
+from heapq import heapify,heappop,heappush
 class Node():
     def __init__ (self,weight,info=None,lef_child=None,righ_child=None):
         self.info = info
@@ -9,21 +10,21 @@ class Node():
 
 class HuffmanCode():
     def __init__(self):
-        self.heap = Heap()
+        self.heap = []
         self.root_node = None
     
     def add_symbol(self,weight,symbol_info=None):
         symbol_node = Node(weight,symbol_info)
-        self.heap.heap_insert(symbol_node)
+        heappush(self.heap,(weight,symbol_node))
     
     def huffman_encode(self):
 
-        while len(self.heap.heap) > 1:
-            node1 = self.heap.heap_pop()
-            node2 = self.heap.heap_pop()
+        while len(self.heap) > 1:
+            node1 = heappop(self.heap)[1]
+            node2 = heappop(self.heap)[1]
             merged_node = self.__merge_nodes(node1, node2)
-            self.heap.heap_insert(merged_node)
-        self.root_node = self.heap.heap_pop()
+            heappush(self.heap,(merged_node.weight,merged_node))
+        self.root_node = heappop(self.heap)
         return self.root_node
 
     def __merge_nodes(self, node1, node2):
