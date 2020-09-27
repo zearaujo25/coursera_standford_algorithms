@@ -14,19 +14,11 @@ def read_input(input_path):
             input_nodes.append(node_weight)
             line_number+=1
 
-    
     return input_nodes
 
-def get_assignment_answer(result_encoding):
-    min_len = float("inf")
-    max_len = float("-inf")
-    for symbol in result_encoding:
-
-        symbol_len = len(result_encoding[symbol])
-        min_len = len(result_encoding[symbol]) if symbol_len < min_len else min_len 
-        max_len = len(result_encoding[symbol]) if symbol_len > max_len else max_len 
-
-    return [max_len,min_len]
+def get_assignment_answer(result_nodes):
+    assigment_nodes = [1,2,3,4,17,117,517,997]
+    return "".join(["1" if node-1 in result_nodes else "0" for node in assigment_nodes])
 
 def get_test_inputs(path):
     inputs = []
