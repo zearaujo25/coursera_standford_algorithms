@@ -4,8 +4,13 @@ def knapsack(sack_size,items):
     for item in items:
         problem_array.append([])
         for used_space in range(0,sack_size+1):
-            item_weight = item[0]
-            item_value = item[1]
-            iteration_answer = max(problem_array[-2][used_space],problem_array[-2][-item_weight]+item_value)
-            problem_array[-1].append(iteration_answer)
+            problem_array[-1].append(None)
+            item_weight = item[1]
+            item_value = item[0]
+
+            without_using_item = problem_array[-2][used_space]
+            using_item = problem_array[-2][used_space-item_weight]+item_value if item_weight <= used_space else float("-inf")
+            iteration_answer = max(without_using_item ,using_item)
+            problem_array[-1][-1] = iteration_answer
+
     return problem_array[-1][-1]
