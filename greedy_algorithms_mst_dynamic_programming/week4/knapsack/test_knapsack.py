@@ -59,6 +59,30 @@ class TestKnapsack(unittest.TestCase):
             self.assertEqual(expected,final_answer)
 
             print("Test OK")
+            
+    def test_assigment1(self):
+        print("Testing Assigment 1")
+        test_input = 'greedy_algorithms_mst_dynamic_programming/week4/knapsack/assigment1.txt'
+        test_case = read_items(test_input," ")
+            
+        final_answer = knapsack(test_case[0],test_case[1])
+
+            
+
+        print("Final Answer: {}".format(final_answer))
+
+    def test_assigment2(self):
+        print("Testing Assigment 2")
+        test_input = 'greedy_algorithms_mst_dynamic_programming/week4/knapsack/assigment2.txt'
+        test_case = read_items(test_input," ")
+            
+        final_answer = knapsack(test_case[0],test_case[1])
+
+            
+
+        print("Final Answer: {}".format(final_answer))
+
+
 
 if __name__ == "__main__":
     unittest.main()
