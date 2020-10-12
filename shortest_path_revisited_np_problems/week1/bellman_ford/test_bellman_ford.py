@@ -21,10 +21,6 @@ def read_graph(graph_path,sep=" "):
             line_number+=1
     return graph
 
-def get_assignment_answer(test_distance_result):
-    nodes = [7,37,59,82,99,115,133,165,188,197]
-    return [test_distance_result[node] for node in nodes]
-
 def get_test_inputs(path):
     inputs = []
     for file in os.listdir(path):
