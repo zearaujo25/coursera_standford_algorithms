@@ -21,9 +21,13 @@ def read_graph(graph_path,sep=" "):
             line_number+=1
     return graph
 
-def get_assignment_answer(test_distance_result):
-    nodes = [7,37,59,82,99,115,133,165,188,197]
-    return [test_distance_result[node] for node in nodes]
+def get_assignment_answer(test_result):
+    if test_result is None:
+        return None
+    else:
+        nodes_shortest_path = map(get_shortest_for_node,test_result.values())
+        final_answer = min(nodes_shortest_path)
+        return final_answer
 
 def get_test_inputs(path):
     inputs = []
@@ -51,12 +55,19 @@ class TestFloydMarshall(unittest.TestCase):
             test_case = read_graph(test_input,sep=" ")
             expected = read_output(test_input)
             test_result = floyd_marshall_all_shortest_paths(test_case)
-            if test_result is None:
-                self.assertEqual(expected,test_result)
-            else:
-                nodes_shortest_path = map(get_shortest_for_node,test_result.values())
-                final_answer = min(nodes_shortest_path)
-                self.assertEqual(expected,final_answer)
+            final_answer = get_assignment_answer(test_result)
+            self.assertEqual(expected,final_answer)
+            print("Test OK")
+
+    def test_assigment(self):
+        test_cases_path = 'shortest_path_revisited_np_problems/week1/assigment'
+        test__files = get_test_inputs(test_cases_path)
+        for test_input in test__files:
+            print("Testing Assigment: "+ test_input)
+            test_case = read_graph(test_input,sep=" ")
+            test_result = floyd_marshall_all_shortest_paths(test_case)
+            final_answer = get_assignment_answer(test_result)
+            print("Assigment {} Answer: {}".format(test_input,final_answer))
             print("Test OK")
             
 if __name__ == "__main__":
