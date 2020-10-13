@@ -11,7 +11,6 @@ def johnson_shortest_path(graph):
     graph = reweight_graph(aux_graph,node_weights)
     weighted_shortest_paths = find_shortest_paths(graph)
     final_shortest_path = weight_back(weighted_shortest_paths,node_weights)
-    print(final_shortest_path)
     return final_shortest_path
 
 def create_extra_node_graph(graph):
@@ -37,13 +36,13 @@ def reweight_graph(graph,node_weights):
             new_edge_weight = edge[2] + node_weights[edge[0]] - node_weights[edge[1]]
             new_edge = (edge[0],edge[1],new_edge_weight)
             new_graph[node]['incoming_edges'].add(new_edge)
-    del new_graph[0]
     return new_graph
 
 def find_shortest_paths(graph):
     node_paths = {}
     for node in graph:
-        node_paths[node] = dijkstra_custom_heap(graph,node)
+        dijkstra_result = dijkstra_custom_heap(graph,node)
+        node_paths[node] = dijkstra_result
     return node_paths
 
 def weight_back(weighted_shortest_paths,node_weights):
