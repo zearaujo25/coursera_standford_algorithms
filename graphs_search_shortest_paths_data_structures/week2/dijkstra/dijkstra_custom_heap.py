@@ -1,5 +1,5 @@
 from heap import Heap
-#this algorythm is O(m*n) because it needs to update all the references of the heap everytime there is a heapfy. to make a true mlogn, it is needed to ahve a custome heap that updates the reference at the same time heapfy goes
+
 def dijkstra_custom_heap(graph,s):
     distances = {}
     distances[s] = 0
