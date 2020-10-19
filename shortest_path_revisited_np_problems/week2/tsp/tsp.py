@@ -1,11 +1,11 @@
-from math import sqrt
+from math import sqrt,log2
 def tsp(nodes):
     solution_array =  create_base_case(nodes)
     for probleam_size in range(2,len(nodes)+1):
         for bitmask in generate_bitmask(probleam_size):
             #Iterando sobre todos os nos excluindo o primeiro
             for destination_node in get_nodes(bitmask,excluded_node=1):
-                solution_array[destination_node] = {}
+                solution_array[bitmask][destination_node] = {}
                 previous_set = exclude_node_from_mask(bitmask,destination_node)
                 iteration_possibilities = create_iteration_possibilities(nodes, solution_array, destination_node, previous_set)
                 solution_array[bitmask][destination_node] = min(iteration_possibilities)
@@ -36,7 +36,8 @@ def get_nodes(bitmask,excluded_node=1):
     while bitmask:
         b = bitmask & (~bitmask+1)
         if b != excluded_node or excluded_node is None:
-            yield b
+            #retornando a posicao no bit 
+            yield int(log2(b) + 1)
         bitmask ^= b
 
 def exclude_node_from_mask(bitmask,node): 
