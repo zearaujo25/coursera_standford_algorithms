@@ -41,7 +41,6 @@ def get_nodes(bitmask,excluded_node=1):
         bitmask ^= b
 
 def exclude_node_from_mask(bitmask,node): 
-  
     # node must be greater than 0 
     if (node <= 0):  
         return bitmask 
