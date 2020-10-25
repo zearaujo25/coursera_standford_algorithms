@@ -38,29 +38,29 @@ def get_assignment_answer(test_result):
     return floor(test_result)
 
 class TestTSP(unittest.TestCase):
-    def test_cousera_test_cases(self):
-        test_cases_path = 'shortest_path_revisited_np_problems/week3/test_cases/'
-        test__files = get_test_inputs(test_cases_path)
-        for test_input in test__files:
-            print("Testing "+ test_input)
-            test_case = read_graph(test_input,sep=" ")
-            expected = read_output(test_input)
-            test_result = tsp(test_case)
-            final_answer = get_assignment_answer(test_result)
-            self.assertEqual(expected,final_answer)
-            print("Test OK")
-            
-            
-    # def test_assigment(self):
-    #     test_cases_path = 'shortest_path_revisited_np_problems/week2/assigment/'
+    # def test_cousera_test_cases(self):
+    #     test_cases_path = 'shortest_path_revisited_np_problems/week3/test_cases/'
     #     test__files = get_test_inputs(test_cases_path)
     #     for test_input in test__files:
-    #         print("Testing Assigment: "+ test_input)
+    #         print("Testing "+ test_input)
     #         test_case = read_graph(test_input,sep=" ")
+    #         expected = read_output(test_input)
     #         test_result = tsp(test_case)
     #         final_answer = get_assignment_answer(test_result)
-    #         print("Assigment {} Answer: {}".format(test_input,final_answer))
+    #         self.assertEqual(expected,final_answer)
     #         print("Test OK")
+            
+            
+    def test_assigment(self):
+        test_cases_path = 'shortest_path_revisited_np_problems/week3/assigment'
+        test__files = get_test_inputs(test_cases_path)
+        for test_input in test__files:
+            print("Testing Assigment: "+ test_input)
+            test_case = read_graph(test_input,sep=" ")
+            test_result = tsp(test_case)
+            final_answer = get_assignment_answer(test_result)
+            print("Assigment {} Answer: {}".format(test_input,final_answer))
+            print("Test OK")
 
 if __name__ == "__main__":
     unittest.main()
