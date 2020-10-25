@@ -9,7 +9,7 @@ def tsp(nodes):
         tour_distance += next_node_distance
         visited_nodes.add(next_node)
         not_visited_nodes.remove(next_node)
-        current_node = next_node    
+        current_node = next_node  
     return tour_distance + get_distance(nodes[1],nodes[current_node]) 
 
 def set_initial_state(nodes):
@@ -28,6 +28,10 @@ def find_next_node(not_visited_nodes, nodes, current_node, next_node_distance, n
             if candidate_node_distance == next_node_distance:
                 next_node_distance = candidate_node_distance if candidate_node < next_node else next_node_distance
                 next_node = candidate_node if candidate_node < next_node else next_node
+            else:
+                next_node_distance = candidate_node_distance
+                next_node = candidate_node
+
     return next_node_distance, next_node
 
 def get_distance(node1,node2):
